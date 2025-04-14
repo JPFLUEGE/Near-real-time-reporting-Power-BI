@@ -1,17 +1,17 @@
 # Near real-time reporting Power-BI
 A side project to get a get a near real-time report done with Power BI as frontend.
-
 Refers to this project: https://github.com/JPFLUEGE/streamlit_amusement_park_api    
 
 APIs being used: [Queue Times API](https://queue-times.com/pages/api)
 
-I hosted the script "test.py" on Azure Functions to execute it automatically in a specified time interval and wanted to share the code for easy replication.
+For the project I hosted the code in "test.py" on Azure Functions to execute it automatically in a specified time interval. Here, I share the pure script for easy replication.
 
-As you can achieve near real-time reporting in Power BI with either a streaming dataset or a DirectQuery mode on a database, I decided to do both variations.
+As you can achieve near real-time reporting in Power BI with either a streaming dataset or a DirectQuery mode on a database, I decided to do both variations. 
 
-sendDatabase() inserts the data to the Postgresql database on Azure. This allows to connect via DirectQuery mode achieving the near real-time effect.
+sendDatabase() inserts the data to the Postgresql database on Azure. This allows to connect via DirectQuery mode achieving the near real-time effect. 
 
 sendPowerBI() sends it to the endpoint of a streaming dataset in Power BI service. A streaming dataset does not store data (only caches it, no refresh needed) therefore the update is seamless. Note: Please note that with a streaming dataset you cannot publish openly to the web allowing external users easily to view it.
+In both cases you need to change it to your own connection/url.
 
 
 
@@ -21,7 +21,7 @@ I explored options on how to achieve a near real-time reporting with Power BI
 
 
 # End product 
-![Alt text](./images/PowerBI.png)
+![Alt text](./images/PowerBI.png) + mobile optimized in the service, not in pure web.
 
 The report had to be set up twice as you cannot change between those two different data sources but end result and design was the same.
 When using a streaming dataset you have to allow cache (some historical values) in order to build a report and not exclusively a dashboard.
