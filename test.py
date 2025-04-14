@@ -76,6 +76,7 @@ def sendPowerBI(df):
         print(f"Failed to send data: {response.status_code} - {response.text}")
 
 
+
 def sendDatabase(df):
     # Access env variable
     DBKEY = os.getenv("DBKEY")
