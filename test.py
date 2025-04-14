@@ -95,6 +95,7 @@ def sendDatabase(df):
     df['Last updated by park'] = pd.to_datetime(df['Last updated by park'])
 
     # Send data to database table
+    # Inserting and overwriting the table as no historical data for this use case needed
     df.to_sql('theme_park_attractions', engine, if_exists='replace', index=False)
     print("Data sent to database successfully")
 
