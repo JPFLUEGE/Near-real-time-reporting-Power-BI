@@ -1,4 +1,4 @@
-# APItoPBItoDB-raw
+# Near real-time reporting Power-BI
 A side project to get a get a near real-time report done with Power BI as frontend.
 Refers to this project: https://github.com/JPFLUEGE/streamlit_amusement_park_api    
 
@@ -36,3 +36,9 @@ CALCULATE(
 The .pbix file can be found in the "PowerBI file" folder of this repo.
 It is the one using DirectQuery mode where no additional measures where needed.
 Pleaes note that you cannot refresh it as you do not have access to the database.
+
+
+
+
+# Contact
+In case of questions reach out via LinkedIn as it is my preferred choice.
