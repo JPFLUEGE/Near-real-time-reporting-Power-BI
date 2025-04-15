@@ -55,7 +55,7 @@ def getWaitTimes(parks):
 
 # Sending data to Power BI streaming dataset
 def sendPowerBI(df):
-    # Add 2 hours for Berlin timezone. Needed for the Power BI streaming dataset only. Streaming dataset ignors the timezone
+    # Add 2 hours for Berlin timezone as timestamp is UTC. Needed for the Power BI streaming dataset only. Streaming dataset ignors the timezone
     df["Last updated by park"] = (pd.to_datetime(df["Last updated by park"], utc=True) + pd.Timedelta(hours=2)).dt.strftime('%Y-%m-%dT%H:%M:%S.%f%z').str.replace(r'(\+|-)(\d{2})(\d{2})$', r'\1\2:\3', regex=True)
     
     # Convert df to json
@@ -87,10 +87,6 @@ def sendDatabase(df):
     # Drop not needed columns
     df = df.drop(columns=["latitude", "longitude"])
 
-    # Subtracting two hours. Database would save it with timezone but Power BI ignors the timezone.
-    # Apparently this only affects Power BI Desktop and Power BI web recognizes the timezone correctly.
-    #df["Last updated by park"] = (pd.to_datetime(df["Last updated by park"], utc=True) - pd.Timedelta(hours=2)).dt.strftime('%Y-%m-%dT%H:%M:%S.%f%z').str.replace(r'(\+|-)(\d{2})(\d{2})$', r'\1\2:\3', regex=True)
-    
     # Convert column to datetime
     df['Last updated by park'] = pd.to_datetime(df['Last updated by park'])
 
@@ -102,7 +98,7 @@ def sendDatabase(df):
 
 
 
-# Retrieving data, unnesting a nested column and renaming
+# Retrieving data, unnesting nested column of park information and renaming
 df = pd.DataFrame(getWaitTimes(getParks()))
 df = pd.concat([df.drop(columns=["park"]), pd.json_normalize(df["park"])], axis=1)
 df["is_open"] = df["is_open"].apply(lambda x: "open" if x == True else "closed")
